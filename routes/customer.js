@@ -1,6 +1,5 @@
 var express           =   require("express"),
     router            =   express.Router(),
-    multer            =   require("multer"),
     bodyParser       =   require("body-parser"),
     mysql             =   require("mysql");
 
@@ -20,24 +19,6 @@ mysqlConnection.connect((err)=> {
     } else{
         console.log("Customer Connection successful")
     }
-});
-
-var Storage = multer.diskStorage({
-    destination: function(req, file, callback) {
-        callback(null, "C:/Users/Maaz Khan/Desktop/");
-    },
-    filename: function(req, file, callback) {
-        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
-    }
-});
-
-
-var upload = multer({
-    storage: Storage
-}).array("imgUploader");
-
-router.get("/customer/signup", function (req, res) {
-    res.render("customer/signup.ejs");
 });
 
 router.post("/customer/signup" ,function (req, res)  {
